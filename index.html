@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COVID-19 News</title>
+    <style>
+       
+    </style>
+</head>
+
+<body>
+    <div id="main-cont"></div>
+    <button onclick="showData()"></button>
+
+    <script>
+        let main = document.querySelector("#main-cont");
+
+        async function showData() {
+            const url = "https://coronavirus-smartable.p.rapidapi.com/news/v1/US/";
+            const options = {
+                method: "GET",
+                headers: {
+                    "x-rapidapi-key": "d26ad10914msh1fe6a248c63b485p147e6djsn02a2d5b9a27e",
+                    "x-rapidapi-host": "coronavirus-smartable.p.rapidapi.com",
+                },
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json();
+                console.log(result);
+
+                result.news.forEach((element) => {
+                    let paragraph = document.createElement("p")
+                    paragraph.innerHTML =`Title: ${element.title}`
+                    main.append(paragraph);
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+     
+    </script>
+</body>
+
+</html>
+           
+                
